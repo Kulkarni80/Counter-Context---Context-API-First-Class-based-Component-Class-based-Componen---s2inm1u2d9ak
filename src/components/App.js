@@ -1,18 +1,25 @@
-import React from 'react'
-import { CounterStateContext } from '../counterContext';
-import '../styles/App.css';
-import { CounterList } from './CounterList';
+import React, { useReducer } from "react";
+import { counterReducer } from "../reducers/counterReducer";
+import "../styles/App.css";
 const App = () => {
-
+  const [state, dispatch] = useReducer(counterReducer, 0);
   return (
-    <CounterStateContext>
-      <div id="main">
-        <CounterList />
-      </div>
-    </CounterStateContext>
-
-  )
-}
-
+    <div id="main">
+      <span id="counter">{state}</span>
+      <button
+        id="increment-btn"
+        onClick={() => dispatch({ type: "INCREMENT" })}
+      >
+        Increment
+      </button>
+      <button
+        id="decrement-btn"
+        onClick={() => dispatch({ type: "DECREMENT" })}
+      >
+        Decrement
+      </button>
+    </div>
+  );
+};
 
 export default App;
